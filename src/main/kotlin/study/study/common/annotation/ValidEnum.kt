@@ -19,6 +19,7 @@ annotation class ValidEnum(
 )
 class ValidEnumValidator : ConstraintValidator<ValidEnum, Any> {
     private lateinit var enumValues: Array<out Enum<*>>
+
     override fun initialize(annotation: ValidEnum) {
         enumValues = annotation.enumClass.java.enumConstants
     }

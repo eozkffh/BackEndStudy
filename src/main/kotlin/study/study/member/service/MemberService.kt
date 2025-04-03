@@ -24,6 +24,7 @@ class MemberService(
         }
 
         member = memberDtoRequest.toEntity()
+
         memberRepository.save(member)
 
         return "회원가입이 완료되었습니다."
