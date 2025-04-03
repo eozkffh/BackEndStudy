@@ -39,11 +39,11 @@ class JwtTokenProvider {
 
         // Access Token
         val accessToken = Jwts.builder()
-            .setSubject(authentication.name)
+            .subject(authentication.name)
             .claim("auth", authorities)
-            .setIssuedAt(now)
-            .setExpiration(accessExpiration)
-            .signWith(key, SignatureAlgorithm.HS256)
+            .issuedAt(now)
+            .expiration(accessExpiration)
+            .signWith(key,Jwts.SIG.HS256)   // Jwts 구문 업데이트
             .compact()
 
         return TokenInfo("Bearer", accessToken)
@@ -93,9 +93,12 @@ class JwtTokenProvider {
 
     private fun getClaims(token: String): Claims =
         Jwts.parser()
-            .setSigningKey(key)
+//            .setSigningKey(key)
+//            .build()
+//            .parseClaimsJws(token)
+//            .body
+            .verifyWith(key)
             .build()
-            .parseClaimsJws(token)
-            .body
-
+            .parseSignedClaims(token)
+            .payload
 }
