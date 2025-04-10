@@ -12,7 +12,7 @@ class Post(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id : Long? = null,
 
-    @Column(nullable = false,length = 30,updatable = false)
+    @Column(nullable = false,length = 30)
     val title: String,
 
     @Column(nullable = false, columnDefinition = "TEXT")
