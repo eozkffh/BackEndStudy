@@ -27,8 +27,7 @@ class BoardController(
      * 게시글 삭제
      */
     @PostMapping("/delete")
-    fun delete(@RequestBody @Valid request: DeleteDto): BaseResponse<Unit> {
-        val resultMsg = boardService.delete(request)
-        return BaseResponse(message = resultMsg)
+    fun delete(){
+
     }
 }

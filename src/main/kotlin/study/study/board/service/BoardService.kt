@@ -30,10 +30,7 @@ class BoardService(
      * 게시글 삭제
      */
     fun delete(deleteDto: DeleteDto): String {
-        val post = boardRepository.findById(deleteDto.postId)   // postId 검색했는데
-            .orElseThrow{RuntimeException("게시글 없음")}    // 없으면 예외 던짐
 
-        boardRepository.delete(post)    //postId가 있으면 삭제.
         return "게시글 삭제 완료"
     }
 }
