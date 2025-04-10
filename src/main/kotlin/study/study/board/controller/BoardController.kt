@@ -18,7 +18,7 @@ class BoardController(
     /**
      * 게시글 작성
      */
-    @PostMapping("/upload")
+    @PostMapping("/")
     fun upload(@RequestBody @Valid request: BoardDtoRequest ): BaseResponse<Unit> {
         val resultMsg = boardService.upload(request)
         return BaseResponse(message = resultMsg)
@@ -26,8 +26,9 @@ class BoardController(
     /**
      * 게시글 삭제
      */
-    @PostMapping("/delete")
-    fun delete(){
-
+    @PostMapping("/")
+    fun delete(@RequestBody @Valid request: DeleteDto): BaseResponse<Unit> {
+        val resultMsg = boardService.delete(request)
+        return BaseResponse(message = resultMsg)
     }
 }
