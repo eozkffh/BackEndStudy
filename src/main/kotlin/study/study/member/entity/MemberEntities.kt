@@ -3,6 +3,7 @@ package study.study.member.entity
 import jakarta.persistence.*
 import study.study.common.status.Dormitory
 import study.study.common.status.Gender
+import study.study.common.status.ROLE
 import java.time.LocalDate
 
 @Entity
@@ -37,4 +38,23 @@ class Member(
 
     @Column(nullable = false,length = 30)
     val dormitory: Dormitory,
+){
+    // 추가
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    val memberRole: List<MemberRole>? = null
+}
+
+@Entity
+class MemberRole(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id : Long? = null,
+
+    @Column(nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    val role: ROLE,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = ForeignKey(name = "fk_user_role_member_id"))
+    val member: Member,
 )
