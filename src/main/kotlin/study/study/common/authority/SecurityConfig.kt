@@ -18,11 +18,14 @@ class SecurityConfig(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .httpBasic{ it.disable() }
-            .csrf{ it.disable() }
-            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            . authorizeHttpRequests {
-                it.requestMatchers("/api/member/signup").anonymous()
+            .httpBasic{ it.disable()}
+            .csrf { it.disable() }
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
+            .authorizeHttpRequests{
+                it.requestMatchers("/api/member/signup","/api/member/login").anonymous()    //회원 가입 및 로그인은 익명 사용자 접근 가능
+                    .requestMatchers("/api/member/info/**","/api/board/**").hasRole("MEMBER")   // 정보접근은 member만 접근 가능
                     .anyRequest().permitAll()
             }
             .addFilterBefore(
@@ -35,4 +38,5 @@ class SecurityConfig(
     @Bean
     fun passwordEncoder(): PasswordEncoder =
         PasswordEncoderFactories.createDelegatingPasswordEncoder()
+
 }

@@ -15,11 +15,13 @@ class BoardService(
     /**
      * 게시글 등록
      */
-    fun upload(request: BoardDtoRequest): String {
+    fun upload(request: BoardDtoRequest, currentUserName :String): String {
 
+        // BoardDtos에 있는 toEntity()를 이용해도 됨. 아래 val post는 일일히 값을 넣어준 경우.
         val post = Post(
             title = request.title,
-            description = request.description
+            description = request.description,
+            writerName = currentUserName,
         )
 
         boardRepository.save(post)      // BoardRepository 오타때문에 save 오류뜸. 대소문자 구별.

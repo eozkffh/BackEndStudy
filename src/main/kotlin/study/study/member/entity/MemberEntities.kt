@@ -4,7 +4,9 @@ import jakarta.persistence.*
 import study.study.common.status.Dormitory
 import study.study.common.status.Gender
 import study.study.common.status.ROLE
+import study.study.member.dto.MemberDtoResponse
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Entity
 @Table(
@@ -39,9 +41,24 @@ class Member(
     @Column(nullable = false,length = 30)
     val dormitory: Dormitory,
 ){
-    // 추가
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole: List<MemberRole>? = null
+
+    private fun LocalDate.formatDate(): String =
+        this.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+
+    fun toDto(): MemberDtoResponse =
+        MemberDtoResponse(
+            id!!,
+            loginId,
+            name,
+
+//            birthDate.formatDate(),
+//            gender.desc,
+            email,
+            dormitory,
+        )
+
 }
 
 @Entity

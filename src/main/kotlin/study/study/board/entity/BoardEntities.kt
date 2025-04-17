@@ -18,7 +18,11 @@ class Post(
     @Column(nullable = false, columnDefinition = "TEXT")
     val description: String,
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
+    val writerName: String,
+
+    // 어차피 여기서 만들어주니까 nullable = true로 비워도 됨.
+    @Column(nullable = true)
     val creationDate: LocalDateTime = LocalDateTime.now(),
 
     )
