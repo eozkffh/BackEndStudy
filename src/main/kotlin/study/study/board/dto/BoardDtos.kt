@@ -3,7 +3,7 @@ package study.study.board.dto
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
-import study.study.board.entity.Post
+import java.time.LocalDateTime
 
 // 게시글 작성 시 받을 정보
 data class BoardDtoRequest(
@@ -43,7 +43,7 @@ data class BoardDtoRequest(
         get() = _writerName!!
 
     /*
-        그냥 Service의 upload 자체에서 일일히 넣어서 생성하도록 했음. toEntity() 하려면 currentUserName 인수 필요함.
+     *   그냥 Service의 upload 자체에서 일일히 넣어서 생성하도록 했음. toEntity() 하려면 currentUserName 인수 필요함.
      */
 //    fun toEntity(currentUserName: String): Post =
 //    Post(id, title, description, currentUserName)
@@ -57,4 +57,13 @@ data class DeleteDto(
     @field:NotNull
     @JsonProperty("postId")
     val postId: Long
+)
+
+
+data class BoardDtoResponse(
+    val id: Long,
+    val title: String,
+    val description: String,
+    val writerName: String,
+    val creationDate: LocalDateTime,
 )

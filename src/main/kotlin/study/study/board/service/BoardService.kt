@@ -1,11 +1,14 @@
 package study.study.board.service
 
 import jakarta.transaction.Transactional
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import study.study.board.dto.BoardDtoRequest
+import study.study.board.dto.BoardDtoResponse
 import study.study.board.dto.DeleteDto
 import study.study.board.entity.Post
 import study.study.board.repository.BoardRepository
+import study.study.common.exception.InvalidInputException
 
 @Transactional
 @Service
@@ -34,5 +37,20 @@ class BoardService(
     fun delete(deleteDto: DeleteDto): String {
 
         return "게시글 삭제 완료"
+    }
+    /**
+     * 게시글 조회
+     */
+    fun getAllPosts(): List<BoardDtoResponse>{
+        val post = boardRepository.findAll()
+        return post.map {it.toDto()}
+    }
+    /**
+     * 특정 게시글 조회
+     */
+    fun getPosts(id : Long): BoardDtoResponse {
+        val post = boardRepository.findByIdOrNull(id)
+            ?: throw InvalidInputException("id","(게시글 ID:${id}) 존재하지 않는 게시글 입니다.")
+        return post.toDto()
     }
 }

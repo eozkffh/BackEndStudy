@@ -1,6 +1,7 @@
 package study.study.board.entity
 
 import jakarta.persistence.*
+import study.study.board.dto.BoardDtoResponse
 import java.time.LocalDateTime
 
 @Entity
@@ -25,4 +26,14 @@ class Post(
     @Column(nullable = true)
     val creationDate: LocalDateTime = LocalDateTime.now(),
 
-    )
+    ){
+
+    fun toDto(): BoardDtoResponse =
+        BoardDtoResponse(
+            id!!,
+            title,
+            description,
+            writerName,
+            creationDate,
+        )
+}
