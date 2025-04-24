@@ -12,13 +12,13 @@ enum class ResultCode(val msg: String) {
 }
 
 enum class Dormitory(val desc: String) {
-    GEA("고운A"),
-    GEB("고운B"),
-    GEC("고운C"),
-    GS11("경상11"),
-    GS12("경상12"),
-    GS13("경상13"),
-    GS14("경상14"),
+    GU_A("고운A"),
+    GU_B("고운B"),
+    GU_C("고운C"),
+    GS_11("경상11"),
+    GS_12("경상12"),
+    GS_13("경상13"),
+    GS_14("경상14"),
 }
 
 enum class ROLE {

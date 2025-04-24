@@ -6,11 +6,12 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Service
 import study.study.common.dto.CustomUser
 import study.study.member.entity.Member
 import study.study.member.repository.MemberRepository
 
-
+@Service
 class CustomUserDetailsService (
     private val memberRepository : MemberRepository,
     private val passwordEncoder : PasswordEncoder,
